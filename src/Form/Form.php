@@ -1,13 +1,13 @@
 <?php
 
-namespace App\core\form;
+namespace Minivel\Form;
 
-use App\core\Model;
+use Minivel\Model;
 
 class Form
 {
     public static function begin(string $action, string $method): Form{
-        echo sprintf('<form action=%s method=%s>', $action, $method);
+        echo sprintf('<Form action=%s method=%s>', $action, $method);
         return new Form;
     }
 
@@ -20,6 +20,6 @@ class Form
     }
 
     public function end(){
-        echo "</form>";
+        echo "</Form>";
     }
 }

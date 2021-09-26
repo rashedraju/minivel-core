@@ -1,7 +1,7 @@
 <?php
 
-namespace App\core;
-use App\core\db\DBModel;
+namespace Minivel;
+use Minivel\DB\DBModel;
 
 abstract class UserModel extends DBModel
 {

@@ -1,16 +1,15 @@
 <?php
 
-namespace App\core\db;
+namespace Minivel\DB;
 
-use App\core\Application;
-use App\core\Model;
+use Minivel\Application;
+use Minivel\Model;
 
 abstract class DBModel extends Model
 {
-    abstract static public function getTableName() : string;
+    abstract public static function getTableName() : string;
     abstract public function getAttributes() : array;
     abstract public static function getPrimaryKey() : string;
-
     public function save(): bool
     {
         $table = $this->getTableName();

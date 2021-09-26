@@ -1,8 +1,8 @@
 <?php
-namespace App\core;
+namespace Minivel;
 
 /**
- * @package App\core
+ * @package Minivel
  */
 class Request{
     public function getPath(){

@@ -1,0 +1,16 @@
+{
+    "name": "rashedraju/minivel-core",
+    "description": "Simple PHP MVC Framework",
+    "autoload": {
+        "psr-4": {
+            "Minivel\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "rashedraju",
+            "email": "rashedraju.cs@gmail.com"
+        }
+    ],
+    "require": {}
+}

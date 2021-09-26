@@ -1,8 +1,8 @@
 <?php
 
-namespace App\core\form;
+namespace Minivel\Form;
 
-use App\core\Model;
+use Minivel\Model;
 
 class InputField extends Field
 {
@@ -26,7 +26,7 @@ class InputField extends Field
     public function renderField(): string
     {
         return sprintf('
-            <input type="%s" name="%s" value="%s" class="form-control %s">
+            <input type="%s" name="%s" value="%s" class="Form-control %s">
         ',
             $this->type,
             $this->attribute,

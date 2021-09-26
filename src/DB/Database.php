@@ -1,8 +1,8 @@
 <?php
 
-namespace App\core\db;
+namespace Minivel\DB;
 
-use App\core\Application;
+use Minivel\Application;
 
 class Database
 {
@@ -10,9 +10,9 @@ class Database
 
     public function __construct(array $config = [])
     {
-        $dsn = $config['db']['dsn'];
-        $username = $config['db']['username'];
-        $password = $config['db']['password'];
+        $dsn = $config['DB']['dsn'];
+        $username = $config['DB']['username'];
+        $password = $config['DB']['password'];
 
         $this->pdo = new \PDO($dsn, $username, $password);
         $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\core\middlewares;
+namespace Minivel\Middlewares;
 
-use App\core\Application;
-use App\core\exceptions\ForbiddenException;
+use Minivel\Application;
+use Minivel\Exceptions\ForbiddenException;
 
 class AuthMiddleware extends BaseMiddleware
 {

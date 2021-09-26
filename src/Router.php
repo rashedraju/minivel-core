@@ -1,7 +1,7 @@
 <?php
-namespace App\core;
+namespace Minivel;
 
-use App\core\exceptions\NotFoundException;
+use Minivel\Exceptions\NotFoundException;
 
 class Router{
     public array $routes = [];

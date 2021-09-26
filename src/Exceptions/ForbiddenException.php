@@ -1,6 +1,6 @@
 <?php
 
-namespace App\core\exceptions;
+namespace Minivel\Exceptions;
 
 class ForbiddenException extends \Exception
 {

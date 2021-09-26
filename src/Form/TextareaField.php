@@ -1,8 +1,8 @@
 <?php
 
-namespace App\core\form;
+namespace Minivel\Form;
 
-use App\core\Model;
+use Minivel\Model;
 
 class TextareaField extends Field
 {
@@ -14,7 +14,7 @@ class TextareaField extends Field
     public function renderField(): string
     {
         return sprintf('
-            <textarea name="%s" class="form-control %s"> </textarea>
+            <textarea name="%s" class="Form-control %s"> </textarea>
         ',
             $this->attribute,
             $this->model->hasError($this->attribute) ? "is-invalid" : "",

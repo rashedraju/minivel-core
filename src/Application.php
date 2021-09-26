@@ -1,18 +1,17 @@
 <?php
-namespace App\core;
+namespace Minivel;
 
-use App\controllers\Controller;
 use Exception;
-use App\core\db\Database;
+use Minivel\DB\Database;
 
 /**
- * @package App\core
+ * @package Minivel
  */
 class Application{
     public static string $ROOT_DIR;
     public static Application $app;
     public string $layout = "main";
-    public ?Controller $controller = null;
+    public ?BaseController $controller = null;
     public Request $request;
     public Router $router;
     public Response $response;
