@@ -21,10 +21,10 @@ class Application{
     public ?UserModel $user = null;
     public View $view;
 
-    function __construct(string $rootDir, array $config = [])
+    function __construct(string $rootDir, array $config)
     {
         self::$ROOT_DIR = $rootDir;
-        $this->userClass = $config['userClass'];
+        $this->userClass = $config['userClass'] ?? "";
         self::$app = $this;
         $this->request = new Request;
         $this->response = new Response();
@@ -59,23 +59,28 @@ class Application{
 
     private function loginBySession()
     {
-        $primaryKey = $this->userClass::getPrimaryKey();
-        $primaryValue = $this->session->get($primaryKey);
-        $user = $this->userClass::findOne([$primaryKey => $primaryValue]);
-        if($user){
-            $this->user = $user;
-        }else {
-            $this->user = null;
+        if($this->userClass){
+            $primaryKey = $this->userClass::getPrimaryKey();
+            $primaryValue = $this->session->get($primaryKey);
+            $user = $this->userClass::findOne([$primaryKey => $primaryValue]);
+
+            if($user){
+                $this->user = $user;
+            }else {
+                $this->user = null;
+            }
         }
     }
 
     public function logout(){
         $this->user = null;
-        $primaryKey = $this->userClass::getPrimaryKey();
-        $this->session->remove($primaryKey);
+        if($this->userClass){
+            $primaryKey = $this->userClass::getPrimaryKey();
+            $this->session->remove($primaryKey);
+        }
     }
 
     public static function isGuest() : bool{
-        return !self::$app->user;
+        return !isset(self::$app->user);
     }
 }
