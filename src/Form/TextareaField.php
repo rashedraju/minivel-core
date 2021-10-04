@@ -14,7 +14,7 @@ class TextareaField extends Field
     public function renderField(): string
     {
         return sprintf('
-            <textarea name="%s" class="Form-control %s"> </textarea>
+            <textarea name="%s" class="form-control %s"> </textarea>
         ',
             $this->attribute,
             $this->model->hasError($this->attribute) ? "is-invalid" : "",

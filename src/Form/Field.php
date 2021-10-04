@@ -25,7 +25,7 @@ abstract class Field
     {
         return sprintf('
             <div class="mb-3">
-                <label for="%s" class="Form-label"> %s </label>
+                <label for="%s" class="form-label"> %s </label>
                 %s
                 <div class="invalid-feedback">
                     %s

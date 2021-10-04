@@ -26,7 +26,7 @@ class InputField extends Field
     public function renderField(): string
     {
         return sprintf('
-            <input type="%s" name="%s" value="%s" class="Form-control %s">
+            <input type="%s" name="%s" value="%s" class="form-control %s">
         ',
             $this->type,
             $this->attribute,
