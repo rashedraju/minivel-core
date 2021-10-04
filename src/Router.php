@@ -7,10 +7,12 @@ class Router{
     public array $routes = [];
     public Request $request;
     public Response $response;
+    public Application $app;
 
     function __construct(Request $request, Response $response){
         $this->request = $request;
         $this->response = $response;
+        $this->app = Application::$app;
     }
 
     public function get($path, $callback){
@@ -21,24 +23,27 @@ class Router{
         $this->routes['post'][$path] = $callback;
     }
 
+    protected function getRequestedCallback(string $path, string $method){
+        return $this->routes[$method][$path] ?? false;
+    }
+
     /**
      * @throws NotFoundException
      */
     public function resolve(){
-        $app = Application::$app;
         $path = $this->request->getPath();
-        $method = $this->request->method();
+        $method = $this->request->getMethod();
 
-        $callback = $this->routes[$method][$path] ?? false;
+        $callback = $this->getRequestedCallback($path, $method);
         if($callback){
             if(is_string($callback)){
-                return $app->view->renderView($callback);
+                return $this->app->view->renderView($callback);
             }
             if(is_array($callback)){
-                $app->controller = new $callback[0];
-                $callback[0] = $app->controller;
+                $this->app->controller = new $callback[0];
+                $callback[0] = $this->app->controller;
 
-                $middlewares = $app->controller->getMiddlewares();
+                $middlewares = $this->app->controller->getMiddlewares();
                 foreach ($middlewares as $middleware) {
                     $middleware->execute($callback[1]);
                 }
