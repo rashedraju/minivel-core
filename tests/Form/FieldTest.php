@@ -42,7 +42,7 @@ class FieldTest extends TestCase
         };
         $expected = '
             <div class="mb-3">
-                <label for="name" class="Form-label"> Name </label>
+                <label for="name" class="form-label"> Name </label>
                 field
                 <div class="invalid-feedback">
                     

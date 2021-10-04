@@ -31,7 +31,7 @@ class InputFieldTest extends TestCase
         };
         $inputField = new InputField($model, "name");
         $expected = '
-            <input type="text" name="name" value="" class="Form-control ">
+            <input type="text" name="name" value="" class="form-control ">
         ';
         $this->assertSame($expected, $inputField->renderField());
     }

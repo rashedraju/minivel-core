@@ -30,7 +30,7 @@ class TextareaFieldTest extends TestCase
         };
         $textareaField = new TextareaField($model, "body");
         $expected = '
-            <textarea name="body" class="Form-control "> </textarea>
+            <textarea name="body" class="form-control "> </textarea>
         ';
         $this->assertSame($expected, $textareaField->renderField());
     }
