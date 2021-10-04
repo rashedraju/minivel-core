@@ -51,25 +51,32 @@ class ApplicationTest extends TestCase
         self::$app->run();
     }
 
-    public function testApplicationUserLogin(){
+    public function testApplicationUserLogin(): UserModel
+    {
         $user = new class() extends UserModel{
             public int $id = 10;
-            public function getAttributes(): array{}
+            public function getAttributes(): array{
+                return [];
+            }
             public static function getPrimaryKey(): string
             {
                 return "id";
             }
             public function getRules(): array
             {
-                // TODO: Implement getRules() method.
+                return [];
             }
             public function getLabels(): array
             {
-                // TODO: Implement getLabels() method.
+                return [];
             }
             public function getDisplayName(): string
             {
-                // TODO: Implement getDisplayName() method.
+                return "";
+            }
+            public static function getTableName(): string
+            {
+                return "";
             }
         };
         $mSession = $this->getMockBuilder(Session::class)
