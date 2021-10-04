@@ -7,7 +7,7 @@ use Minivel\Model;
 class Form
 {
     public static function begin(string $action, string $method): Form{
-        echo sprintf('<Form action=%s method=%s>', $action, $method);
+        echo sprintf('<form action=%s method=%s>', $action, $method);
         return new Form;
     }
 
@@ -20,6 +20,6 @@ class Form
     }
 
     public function end(){
-        echo "</Form>";
+        echo "</form>";
     }
 }
