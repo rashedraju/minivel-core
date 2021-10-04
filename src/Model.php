@@ -13,7 +13,7 @@ abstract class Model
 
     public array $errors = [];
 
-    abstract public function rules() : array;
+    abstract public function getRules() : array;
     abstract public function getLabels() : array;
 
     public function loadData($data){
@@ -25,7 +25,7 @@ abstract class Model
     }
 
     public function validate(): bool{
-        foreach ($this->rules() as $attribute => $rules){
+        foreach ($this->getRules() as $attribute => $rules){
             $value = $this->$attribute;
             $label = $this->getLabel($attribute);
 
@@ -70,7 +70,6 @@ abstract class Model
                 }
             }
         }
-
         return empty($this->errors);
     }
 
