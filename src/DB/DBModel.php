@@ -7,9 +7,10 @@ use Minivel\Model;
 
 abstract class DBModel extends Model
 {
-    abstract public static function getTableName() : string;
     abstract public function getAttributes() : array;
     abstract public static function getPrimaryKey() : string;
+    abstract public static function getTableName(): string;
+
     public function save(): bool
     {
         $table = $this->getTableName();
