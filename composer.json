@@ -12,5 +12,8 @@
             "email": "rashedraju.cs@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "phpunit/phpunit": "^9.5",
+        "vlucas/phpdotenv": "^5.3"
+    }
 }
