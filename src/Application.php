@@ -38,7 +38,11 @@ class Application{
 
     public function run(){
         try {
-            echo $this->router->resolve();
+            if($this->request->getRequestType() == 'api'){
+                echo json_encode($this->router->resolve());
+            }else{
+                echo $this->router->resolve();
+            }
         }catch (Exception $e){
             $this->response->setStatusCode($e->getCode());
             echo $this->view->renderView("_error", [

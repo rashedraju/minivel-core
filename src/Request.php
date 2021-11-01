@@ -1,29 +1,56 @@
 <?php
 namespace Minivel;
 
-/**
- * @package Minivel
- */
 class Request{
-    public function getPath(){
-        $uri = $_SERVER['REQUEST_URI'] ?? "/";
+    private array $server;
+    private const REQUEST_TYPE_WEB = 'web';
+    private const REQUEST_TYPE_API = 'api';
+
+    public function __construct()
+    {
+        $this->server = $_SERVER;
+    }
+
+    public function getPath(): string
+    {
+        $uriExploded = $this->explodeUri($this->getUri());
+        return $uriExploded[0] == self::REQUEST_TYPE_API ? $uriExploded[1] : $uriExploded[0];
+    }
+
+    public function getMethod(): string{
+        return strtolower($this->server['REQUEST_METHOD']);
+    }
+
+    public function getRequestType(): string
+    {
+        $uriExploded = $this->explodeUri($this->getUri());
+        if($uriExploded[0] === self::REQUEST_TYPE_API){
+            return self::REQUEST_TYPE_API;
+        }
+        return self::REQUEST_TYPE_WEB;
+    }
+
+    public function getUri():string{
+        $uri = $this->server['REQUEST_URI'] ?? "/";
         $position = strpos($uri, "?");
-        
+
         if($position){
             return substr($uri, 0, $position);
         }
         return $uri;
     }
 
-    public function getMethod(): string{
-        return strtolower($_SERVER['REQUEST_METHOD']);
+    protected function explodeUri($uri):array{
+        return array_filter(explode("/", $uri));
     }
 
-    public function isGet(){
+    public function isGet(): bool
+    {
         return $this->getMethod() === "get";
     }
 
-    public function isPost(){
+    public function isPost(): bool
+    {
         return $this->getMethod() === "post";
     }
 

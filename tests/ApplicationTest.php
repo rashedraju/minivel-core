@@ -40,14 +40,23 @@ class ApplicationTest extends TestCase
     }
 
     public function testApplicationRunMethodExecuteRouteResolve(){
-        $mock = $this->getMockBuilder(Router::class)
+        $mockRoute = $this->getMockBuilder(Router::class)
             ->disableOriginalConstructor()
             ->onlyMethods(["resolve"])
             ->getMock();
-        $mock->method("resolve")
+        $mockRoute->method("resolve")
             ->willReturn("test resolve");
-        self::$app->router = $mock;
-        $this->expectOutputString("test resolve");
+
+        $mockRequest = $this->getMockBuilder(Request::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['getRequestType'])
+            ->getMock();
+        $mockRequest->method('getRequestType')
+            ->willReturn("api");
+        self::$app->router = $mockRoute;
+        self::$app->request = $mockRequest;
+
+        $this->expectOutputString("\"test resolve\"");
         self::$app->run();
     }
 

@@ -6,54 +6,66 @@ use PHPUnit\Framework\TestCase;
 
 class RequestTest extends TestCase
 {
-    protected Request $request;
-
-    protected function setUp(): void
-    {
-        $this->request = new Request();
-    }
-
     public function testGetPathGivesRequestUriPath(){
-        $this->assertSame("/", $this->request->getPath());
+        $m = $this->getMockBuilder(Request::class)
+            ->onlyMethods(['explodeUri'])
+            ->getMock();
+        $m->method("explodeUri")
+            ->willReturn(['api', 'path']);
+        $this->assertSame("path", $m->getPath());
     }
 
     public function testRequestIsGet(){
-        $mocked = $this->getMockBuilder(Request::class)
+        $m = $this->getMockBuilder(Request::class)
             ->onlyMethods(['getMethod'])
             ->getMock();
-        $mocked->method("getMethod")
+        $m->method("getMethod")
             ->willReturn("get");
-        $this->assertTrue($mocked->isGet());
+        $this->assertTrue($m->isGet());
     }
 
     public function testRequestIsPost(){
-        $mocked = $this->getMockBuilder(Request::class)
+        $m = $this->getMockBuilder(Request::class)
             ->onlyMethods(['getMethod'])
             ->getMock();
-        $mocked->method("getMethod")
+        $m->method("getMethod")
             ->willReturn("post");
-        $this->assertTrue($mocked->isPost());
+        $this->assertTrue($m->isPost());
+    }
+
+    public function testGetRequestType(){
+        $m = $this->getMockBuilder(Request::class)
+            ->onlyMethods(['explodeUri'])
+            ->getMock();
+        $m->method('explodeUri')
+            ->willReturn(['api', 'path']);
+        $this->assertSame('api', $m->getRequestType());
+    }
+
+    public function testGetUri(){
+        $request = new Request();
+        $this->assertSame("/", $request->getUri());
     }
 
     public function testGetBodyMethodWhenRequestIsGet(){
         $_GET["username"]  = "john doe";
         $_GET['email'] = "12345678";
-        $mocked = $this->getMockBuilder(Request::class)
+        $m = $this->getMockBuilder(Request::class)
             ->onlyMethods(["getMethod"])
             ->getMock();
-        $mocked->method("getMethod")
+        $m->method("getMethod")
             ->willReturn("get");
-        $this->assertCount(2, $mocked->getBody());
+        $this->assertCount(2, $m->getBody());
     }
 
     public function testGetBodyMethodWhenRequestIsPost(){
         $_POST["username"]  = "john doe";
         $_POST['email'] = "12345678";
-        $mocked = $this->getMockBuilder(Request::class)
+        $m = $this->getMockBuilder(Request::class)
             ->onlyMethods(["getMethod"])
             ->getMock();
-        $mocked->method("getMethod")
+        $m->method("getMethod")
             ->willReturn("post");
-        $this->assertCount(2, $mocked->getBody());
+        $this->assertCount(2, $m->getBody());
     }
 }
