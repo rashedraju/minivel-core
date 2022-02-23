@@ -27,7 +27,7 @@ class Router{
         $this->parseRoute(self::REQUEST_POST, $path, $callback);
     }
 
-    protected function parseRoute($method, $path, $callback){
+    private function parseRoute($method, $path, $callback){
         $explodedPath = $this->explodePath($path);
 
         if($explodedPath[0] == self::REQUEST_API){

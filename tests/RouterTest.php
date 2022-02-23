@@ -22,6 +22,14 @@ class RouterTest extends TestCase
         return $mockedRequest;
     }
 
+    public function testRouteGetStoreCallbackToPath(){
+        $m = $this->getMockBuilder(Router::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $m->get('/api/users', function(){});
+        $this->assertCount(1, $m->routes);
+    }
+
     public function testRouteResolveWithController(){
 
         $mockedRouter = $this->getMockBuilder(Router::class)
